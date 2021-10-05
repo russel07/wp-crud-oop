@@ -21,7 +21,7 @@ class OOPCrud
         $this->activate_me();
         $this->deactivate_me();
         $this->define_admin_hooks();
-        //$this->define_public_hooks();
+        $this->load_api();
     }
 
     public static function getInstance()
@@ -38,6 +38,7 @@ class OOPCrud
         require_once plugin_dir_path(PLUGIN_FILE_URL) . '/includes/plugin-activator.php';
         require_once plugin_dir_path(PLUGIN_FILE_URL) . '/includes/plugin-deactivator.php';
         require_once plugin_dir_path(PLUGIN_FILE_URL) . '/includes/plugin-admin.php';
+        require_once plugin_dir_path(PLUGIN_FILE_URL) . '/includes/api/api.php';
         require_once plugin_dir_path(PLUGIN_FILE_URL) . '/includes/plugin-loader.php';
         $this->loader = new PluginLoader();
     }
@@ -58,6 +59,11 @@ class OOPCrud
         $this->loader->add_action('admin_init', $admin, 'enqueue_style');
         $this->loader->add_action('admin_init', $admin, 'enqueue_scripts');
         $this->loader->add_filter('script_loader_tag', $admin, 'add_type_attribute' , 10, 3);
+    }
+
+    function load_api(){
+        $api = new CrudAPI();
+        $this->loader->add_action('rest_api_init', $api, 'my_awesome_func');
     }
 
     public function run(){
