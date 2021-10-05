@@ -26,6 +26,8 @@
 */
 
 const PLUGIN_FILE_URL = __FILE__;
+const PRODUCT_TABLE = 'rus_products';
+
 require plugin_dir_path( __FILE__ ) . 'includes/oop-crud.php';
 
 

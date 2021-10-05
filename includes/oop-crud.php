@@ -37,6 +37,7 @@ class OOPCrud
     {
         require_once plugin_dir_path(PLUGIN_FILE_URL) . '/includes/plugin-activator.php';
         require_once plugin_dir_path(PLUGIN_FILE_URL) . '/includes/plugin-deactivator.php';
+        require_once plugin_dir_path(PLUGIN_FILE_URL) . '/includes/plugin-admin.php';
         require_once plugin_dir_path(PLUGIN_FILE_URL) . '/includes/plugin-loader.php';
         $this->loader = new PluginLoader();
     }
@@ -52,8 +53,10 @@ class OOPCrud
     }
 
     public function define_admin_hooks(){
-        $admin_menu = new PluginActivator();
-        $this->loader->add_action( 'admin_menu', $admin_menu, 'products_admin_menu' );
+        $admin = new PluginAdmin($this->plugin_name, $this->version);
+        $this->loader->add_action( 'admin_menu', $admin, 'products_admin_menu' );
+        $this->loader->add_action('admin_init', $admin, 'enqueue_style');
+        $this->loader->add_action('admin_init', $admin, 'enqueue_scripts');
     }
 
     public function run(){

@@ -7,7 +7,7 @@ class PluginActivator {
         global $product_table_version;
         $product_table_version = 1.0;
 
-        $table_name = $wpdb->prefix.'productss';
+        $table_name = $wpdb->prefix.PRODUCT_TABLE;
 
         $sql = "CREATE TABLE  IF NOT EXISTS " . $table_name . " (
         id int(11) NOT NULL AUTO_INCREMENT,
@@ -28,33 +28,5 @@ class PluginActivator {
         ));
 
         add_option('product_table_version', $product_table_version);
-    }
-
-    function products_admin_menu() {
-        add_menu_page(
-            'Manage Product',// page title
-            'Manage Product',// menu title
-            'manage_options',// capability
-            'products',// menu slug
-            'manage_product_html'
-        );
-
-        add_submenu_page(
-            'products',
-            'Products',
-            'All Products',
-            'manage_options',
-            'products',
-            'manage_product_html'
-        );
-
-        add_submenu_page(
-            'products',
-            'Add Product',
-            'Add Product',
-            'manage_options',
-            'add-product',
-            'add_product_form'
-        );
     }
 }

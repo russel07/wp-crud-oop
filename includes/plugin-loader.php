@@ -9,7 +9,6 @@ class PluginLoader {
     {
         $this->actions = array();
         $this->filters = array();
-        $this->hooks = array();
     }
 
     public function add_action( $hook, $component, $callback, $priority = 10, $accepted_args = 1 ) {
