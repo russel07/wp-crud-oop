@@ -57,6 +57,7 @@ class OOPCrud
         $this->loader->add_action( 'admin_menu', $admin, 'products_admin_menu' );
         $this->loader->add_action('admin_init', $admin, 'enqueue_style');
         $this->loader->add_action('admin_init', $admin, 'enqueue_scripts');
+        $this->loader->add_filter('script_loader_tag', $admin, 'add_type_attribute' , 10, 3);
     }
 
     public function run(){

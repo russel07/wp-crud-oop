@@ -26,12 +26,27 @@ class PluginAdmin {
     }
 
     public function enqueue_style(){
-        //wp_register_style('custom_crud_asset', plugins_url('/rus-wp-crud-plugin/public/css/custom_crud_style.css'));
-        //wp_enqueue_style('custom_crud_asset');
         wp_enqueue_style( $this->name, plugin_dir_url( PLUGIN_FILE_URL ) . 'css/style.css', array(), $this->version, 'all' );
     }
 
     public function enqueue_scripts(){
-        wp_enqueue_script( $this->name, plugin_dir_url( PLUGIN_FILE_URL ) . 'js/main.js', array(), $this->version, 'all' );
+        wp_register_script($this->name.'vue', 'https://cdn.jsdelivr.net/npm/vue@2.6.14', array(), $this->version, 'all' );
+        wp_register_script($this->name.'vue-router', 'https://unpkg.com/vue-router@2.0.0/dist/vue-router.js', array(), $this->version, 'all' );
+        wp_register_script($this->name.'axios', 'https://unpkg.com/axios/dist/axios.min.js', array(), $this->version, 'all' );
+        wp_register_script($this->name.'main', plugin_dir_url( PLUGIN_FILE_URL ) . 'js/main.js', array(), $this->version, 'all' );
+
+        wp_enqueue_script( $this->name.'vue' );
+        wp_enqueue_script( $this->name.'vue-router' );
+        wp_enqueue_script( $this->name.'axios' );
+        wp_enqueue_script( $this->name.'main' );
+
+    }
+
+    public function add_type_attribute($tag, $handle, $src) {
+        if ( $this->name.'main' !== $handle ) {
+            return $tag;
+        }
+        $tag = '<script type="module" src="' . esc_url( $src ) . '"></script>';
+        return $tag;
     }
 }
