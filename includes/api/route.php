@@ -36,12 +36,6 @@ class Route extends WP_REST_Controller {
         $table_name = $wpdb->prefix . PRODUCT_TABLE;
         $this->items = $wpdb->get_results("SELECT * FROM $table_name", ARRAY_A);
 
-        $response = [
-            'id' => get_option('id', true),
-            'product_title' => get_option('product_title', true),
-            'product_description' => get_option('product_description', true)
-        ];
-
         return rest_ensure_response( $this->items );
     }
 
@@ -51,6 +45,22 @@ class Route extends WP_REST_Controller {
 
     public function create_item($request)
     {
+        if(isset( $request['project_title'] ))
+            return rest_ensure_response( [
+                'project_title' => 'Here',
+                'description' => 'Here',
+                'price' => 'Here',
+            ] );
+        else
+            return rest_ensure_response( [
+                'project_title' => 'No Data',
+                'description' => 'Here',
+                'price' => 'Here',
+            ] );
+        $title = isset( $request['project_title'] ) ? sanitize_text_field( $request['project_title'] ): '';
+        $description = isset( $request['project_description'] ) ? sanitize_text_field( $request['project_description'] ): '';
+        $price = isset( $request['price'] ) ? sanitize_text_field( $request['price'] ): '';
+
 
     }
 

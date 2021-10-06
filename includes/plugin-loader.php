@@ -39,7 +39,7 @@ class PluginLoader {
             add_filter( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
         }
 
-        foreach ( $this->actions as $hook ) {
+        foreach ( $this->actions as $hook ) {dd($hook['component']);
             add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
         }
 

@@ -1,6 +1,8 @@
 export default {
     template: `
     <div class="wrap">
+        <h1 class="wp-heading-inline">Products</h1>
+        <a href="#/add-product" class="page-title-action">Add Product</a>
         <table class="wp-list-table widefat fixed striped table-view-list products">
             <thead>
                 <tr>
