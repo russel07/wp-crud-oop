@@ -60,7 +60,7 @@ export default {
         }
     },
     created: function (){
-        console.log("inside add product");
+        console.log("inside add products");
     },
     methods: {
         createProduct: function (){

@@ -30,7 +30,7 @@ class PluginAdmin {
     }
 
     public function enqueue_scripts(){
-        wp_register_script($this->name.'vue', 'https://cdn.jsdelivr.net/npm/vue@2.6.14', array(), $this->version, 'all' );
+        wp_register_script($this->name.'vue', plugin_dir_url( PLUGIN_FILE_URL ) . 'js/vue-main.js', array(), $this->version, 'all' );
         wp_register_script($this->name.'vue-router', 'https://unpkg.com/vue-router@2.0.0/dist/vue-router.js', array(), $this->version, 'all' );
         wp_register_script($this->name.'axios', 'https://unpkg.com/axios/dist/axios.min.js', array(), $this->version, 'all' );
         wp_register_script($this->name.'main', plugin_dir_url( PLUGIN_FILE_URL ) . 'js/main.js', array(), $this->version, 'all' );
